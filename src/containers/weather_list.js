@@ -4,12 +4,27 @@ import { connect } from 'react-redux'
 
 class WeatherList extends Component {
   renderWeather (cityData) {
+    const tempInKelvin = cityData.list.map((object) => {
+      return object.main.temp
+    })
+
+    const tempInCelsius = tempInKelvin.map((temp) => {
+      return Math.round((temp - 273.15) * 100) / 100
+    })
+
+    console.log('kelvin', tempInKelvin)
+    console.log('celsius', tempInCelsius)
+
     return (
       <tr>
         <td>{cityData.city.name}</td>
       </tr>
     )
   }
+
+// cityData.list.main.temp
+// <td>{cityData.list[0].main.pressure}</td>
+// <td>{cityData.list[0].main.humidity}</td>
 
   render () {
     return (
@@ -30,7 +45,7 @@ class WeatherList extends Component {
   }
 }
 
-function mapStateToProps ({ weather }) {;
+function mapStateToProps ({weather}) {
   return { weather }
 }
 
