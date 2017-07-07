@@ -1,30 +1,37 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import { bindActionCreators } from 'redux'
+import Graph from '../components/graph'
 
 class WeatherList extends Component {
-  renderWeather (cityData) {
-    const tempInKelvin = cityData.list.map((object) => {
-      return object.main.temp
+  renderWeather (cityData, i) {
+    const name = cityData.city.name
+    const temps = cityData.list.map((object) => {
+      return Math.round((object.main.temp - 273.15) * 100) / 100
     })
 
-    const tempInCelsius = tempInKelvin.map((temp) => {
-      return Math.round((temp - 273.15) * 100) / 100
+    const pressure = cityData.list.map((object) => {
+      return Math.round((object.main.pressure) * 100) / 100
     })
 
-    console.log('kelvin', tempInKelvin)
-    console.log('celsius', tempInCelsius)
+    const humidity = cityData.list.map((object) => {
+      return Math.round((object.main.humidity) * 100) / 100
+    })
 
     return (
-      <tr>
-        <td>{cityData.city.name}</td>
+      <tr key={i}>
+        <td>{name}</td>
+        <td>
+          <Graph data={temps} color='red' />
+        </td>
+        <td>
+          <Graph data={pressure} color='green' />
+        </td>
+        <td>
+          <Graph data={humidity} color='blue' />
+        </td>
       </tr>
     )
   }
-
-// cityData.list.main.temp
-// <td>{cityData.list[0].main.pressure}</td>
-// <td>{cityData.list[0].main.humidity}</td>
 
   render () {
     return (
@@ -32,9 +39,9 @@ class WeatherList extends Component {
         <thead>
           <tr>
             <th>City</th>
-            <th>Temperature</th>
-            <th>Pressure</th>
-            <th>Humidity</th>
+            <th width={350}>Temperature</th>
+            <th width={350}>Pressure</th>
+            <th width={350}>Humidity</th>
           </tr>
         </thead>
         <tbody>
