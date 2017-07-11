@@ -6,9 +6,6 @@ let average = (data) => {
   return _.round(_.sum(data) / data.length)
 }
 
-// const average = arr => arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
-
-
 export default (props) => {
   return (
     <Sparklines data={props.data}>
