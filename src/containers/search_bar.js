@@ -27,7 +27,7 @@ class SearchBar extends Component {
         onSubmit={this.onFormSubmit}
         className='input-group'>
         <input type='text'
-          placeholder='Get a five day forecats in your favorite city'
+          placeholder='Get a five day forecats in your favorite city in The Netherlands'
           className='form-control'
           value={this.state.term}
           onChange={this.onInputChange} />
